@@ -1,0 +1,9 @@
+{
+  "namespace": "api",
+  "private": false,
+  "name": "jsonp-posts",
+  "type": "proxy",
+  "methods": ["get"],
+  "endpoint": "https://jsonplaceholder.typicode.com/posts",
+  "status": "published"
+}
