@@ -1,16 +1,16 @@
 {
-  "name": "@backdropjs/server-nodejs",
-  "version": "1.0.0-alpha.11",
+  "name": "@valet-is/server-nodejs",
+  "version": "1.0.0-alpha.0",
   "main": "./dist/bin/bootstrap.js",
   "scripts": {
     "start": "cross-env NODE_ENV=development nodemon --exec babel-node ./src/bin/bootstrap.js",
-    "prestart:prod": "yarn build",
+    "prestart:prod": "npm run build",
     "start:prod": "cross-env NODE_ENV=production node ./dist/bin/bootstrap.js",
     "debug": "cross-env NODE_ENV=debug nodemon --inspect --exec babel-node ./src/bin/bootstrap.js",
     "prebuild": "rm -rf dist",
     "build": "babel ./src --out-dir dist --copy-files",
     "lint": "eslint 'src/**/*.js'",
-    "lint:fix": "yarn lint -- --fix",
+    "lint:fix": "npm run lint -- --fix",
     "format": "prettier --write 'src/**/*.js'"
   },
   "nodemonConfig": {
@@ -20,15 +20,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/thinkholic/backdrop-js.git",
-    "directory": "packages/server-nodejs"
+    "url": "git+https://github.com/valet-is/server-nodejs.git"
   },
   "author": "thinkholic",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/thinkholic/backdrop-js/issues"
+    "url": "https://github.com/valet-is/central/issues"
   },
-  "homepage": "https://github.com/thinkholic/backdrop-js#readme",
+  "homepage": "https://github.com/valet-is/central#readme",
   "dependencies": {
     "@backdropjs/jsondb": "^0.0.3",
     "axios": "^0.21.1",
