@@ -1,7 +1,8 @@
 import bcrypt from 'bcrypt';
-import { db } from 'database';
-import { response } from 'utils/http';
 import uniqid from 'uniqid';
+
+import { db } from '@core/database';
+import { response } from '@core/utils/http';
 
 import { salt } from 'config';
 

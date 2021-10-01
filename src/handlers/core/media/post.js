@@ -1,6 +1,7 @@
 import forEach from 'lodash/forEach';
 import keysIn from 'lodash/keysIn';
-import { response } from 'utils/http';
+
+import { response } from '@core/utils/http';
 
 import { mediaPath, baseUrl, mediaDir } from 'config';
 

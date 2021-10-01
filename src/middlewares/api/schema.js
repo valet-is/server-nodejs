@@ -1,11 +1,11 @@
 /* eslint no-unused-vars: 0 */
 import pick from 'lodash/pick';
-import forEach from 'lodash/forEach';
+// import forEach from 'lodash/forEach';
 
-import { response } from 'utils/http';
+import { response } from '@core/utils/http';
 
 const validate = (inputs, schema) => {
-  let valid = true;
+  const valid = true;
   const errors = {};
 
   // forEach(inputs, (value, field) => {

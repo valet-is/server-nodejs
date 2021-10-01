@@ -8,15 +8,15 @@ import rateLimit from 'express-rate-limit';
 import mongoSanitize from 'express-mongo-sanitize';
 import hpp from 'hpp';
 
-import * as pingHandler from 'handlers/ping';
-import * as bootstrapHandler from 'handlers/bootstrap';
+import * as pingHandler from '@core/handlers/ping';
+import * as bootstrapHandler from '@core/handlers/bootstrap';
 
-import authRoutes from 'routes/auth';
-import coreRoutes from 'routes/core';
-import apiRoutes from 'routes/api';
-import oauthRoutes from 'routes/oauth';
+import authRoutes from '@core/routes/auth';
+import coreRoutes from '@core/routes/core';
+import apiRoutes from '@core/routes/api';
+import oauthRoutes from '@core/routes/oauth';
 
-import logger from 'utils/logger';
+import logger from '@core/utils/logger';
 
 import { port } from 'config';
 

@@ -1,7 +1,8 @@
 import jwt from 'jsonwebtoken';
 
-import { db } from 'database';
-import { response } from 'utils/http';
+import { db } from '@core/database';
+import { response } from '@core/utils/http';
+
 import { jwtSecret } from 'config';
 
 export function auth(req, res, next) {

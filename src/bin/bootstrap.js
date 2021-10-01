@@ -4,10 +4,10 @@ import 'regenerator-runtime/runtime';
 
 import path from 'path';
 
-import { isFileExists, ensureDirSync } from 'utils/fs';
-import logger from 'utils/logger';
+import { isFileExists, ensureDirSync } from '@core/utils/fs';
+import logger from '@core/utils/logger';
 
-import config from '../data/config.user.json';
+import config from '@core/data/config.user.json';
 
 const jsondbPath = path.join(__dirname, '..', '..', '.jsondb');
 
@@ -35,7 +35,7 @@ export default async function bootstrap() {
       case 'jsondb':
         ensureDirSync(jsondbPath);
 
-        db = require('database/jsondb');
+        db = require('@core/database/jsondb');
         if (db.get()) {
           logger.log(`+ ${dbConn} started.`);
         } else {
@@ -60,7 +60,7 @@ export default async function bootstrap() {
         break;
 
       case 'mongodb':
-        db = require('database/mongodb');
+        db = require('@core/database/mongodb');
         if (db.get()) {
           logger.log(`+ ${dbConn} started.`);
         } else {

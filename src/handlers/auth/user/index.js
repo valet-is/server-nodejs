@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { db } from 'database';
-import { response } from 'utils/http';
+import { db } from '@core/database';
+import { response } from '@core/utils/http';
 import uniqid from 'uniqid';
 
 import { jwtSecret } from 'config';

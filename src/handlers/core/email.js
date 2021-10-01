@@ -1,5 +1,5 @@
-import { response } from 'utils/http';
-import Mailer from 'utils/email';
+import { response } from '@core/utils/http';
+import Mailer from '@core/utils/email';
 
 // eslint-disable-next-line consistent-return
 export function post(req, res) {
