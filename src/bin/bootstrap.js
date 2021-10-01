@@ -4,12 +4,12 @@ import 'regenerator-runtime/runtime';
 
 import path from 'path';
 
-import { isFileExists, ensureDirSync } from '@core/utils/fs';
+import db from '@core/database';
+import { isFileExists } from '@core/utils/fs';
 import logger from '@core/utils/logger';
 
-import config from '@core/data/config.user.json';
-
-const jsondbPath = path.join(__dirname, '..', '..', '.jsondb');
+const root = path.resolve(__dirname, '../../');
+const dotEnvPath = path.join(root, '.env');
 
 const end = (err) => {
   logger.error(err);
@@ -18,71 +18,19 @@ const end = (err) => {
 
 export default async function bootstrap() {
   try {
+    logger.log('Starting server...');
+
     // Check for `.env` and load environment variables from it if it exists.
-    const envfilePath = path.join(__dirname, '..', '..', '.env');
-    if (!isFileExists(envfilePath)) {
+    if (!isFileExists(dotEnvPath)) {
       // throw new Error('Error: `.env` file is missing!.');
       end('Error: `.env` file is missing!.');
     }
     require('dotenv').config();
 
     // Ensure the database connection is up and running.
-    const dbConn = process.env.DB_CONNECTION;
-    logger.log(`Starting ${dbConn}..`);
+    await db();
 
-    let db = null;
-    switch (dbConn) {
-      case 'jsondb':
-        ensureDirSync(jsondbPath);
-
-        db = require('@core/database/jsondb');
-        if (db.get()) {
-          logger.log(`+ ${dbConn} started.`);
-        } else {
-          db.connect({
-            initialData: [
-              {
-                coll: 'config',
-                data: [config],
-              },
-              {
-                coll: 'users',
-                data: [],
-              },
-              {
-                coll: 'resources',
-                data: [],
-              },
-            ],
-          });
-          logger.log(`+ ${dbConn} connected.`);
-        }
-        break;
-
-      case 'mongodb':
-        db = require('@core/database/mongodb');
-        if (db.get()) {
-          logger.log(`+ ${dbConn} started.`);
-        } else {
-          await db.connect();
-          // user config
-          const userConfig = await db
-            .get()
-            .collection('config')
-            .findOne({ type: 'user' });
-          if (!userConfig) {
-            await db.get().collection('config').insertOne(config);
-          }
-          logger.log(`+ ${dbConn} connected.`);
-        }
-        break;
-
-      default:
-        // throw new Error(`Error: Unsupported database connection: ${dbConn}`);
-        end(`Error: Unsupported database connection: ${dbConn}`);
-    }
-
-    require('../index');
+    require('../');
   } catch (err) {
     end(err);
   }

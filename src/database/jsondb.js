@@ -1,19 +1,22 @@
-import JsonDB from '@backdropjs/jsondb';
-
-import { jsonDbPath } from 'config';
+import JsonDB from '@valet-is/jsondb';
 
 let _db = null;
 let _collection = null;
 
-const getCollections = () => {
-  _db = new JsonDB(jsonDbPath, {});
-  _collection = _db.collections;
-  return _collection;
-};
+export async function connect() {
+  _db = new JsonDB();
+  return _db;
+}
 
 export function get() {
   return _db;
 }
+
+const getCollections = () => {
+  if (!_db) _db = new JsonDB();
+  _collection = _db.collections;
+  return _collection;
+};
 
 export function db(coll = null) {
   if (!coll) return getCollections();
@@ -21,12 +24,6 @@ export function db(coll = null) {
 }
 
 export function createCollection(collName) {
+  if (!_db) _db = new JsonDB();
   _db.createCollection(collName);
-}
-
-export function connect(config = {}) {
-  if (!_db) {
-    _db = new JsonDB(jsonDbPath, config);
-  }
-  return _db;
 }
