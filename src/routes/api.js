@@ -1,8 +1,7 @@
 import express from 'express';
 
-import * as apiMiddlewares from '@app/middlewares/api';
-import * as handlers from '@app/handlers';
 import * as apiHandlers from '@app/handlers/api';
+import * as apiMiddlewares from '@app/middlewares/api';
 
 const router = express.Router();
 
@@ -37,6 +36,6 @@ router.delete(
   apiHandlers.delete
 );
 
-router.get('/', handlers.api);
+router.get('/', apiHandlers.index);
 
 export default router;

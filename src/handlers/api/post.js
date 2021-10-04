@@ -1,23 +1,20 @@
-import { db } from '@core/database';
 import * as response from '@app/utils/http';
-import logger from '@core/utils/logger';
 import * as customHanlders from '@app/handlers/custom';
 
 export default function post(req, res) {
   try {
     const { resourceConfig } = req;
 
+    // Check if the resource is a custom handler
+    // and if so, call the handler
     if (resourceConfig.type === 'custom') {
       return customHanlders[resourceConfig.type](req, res);
     }
 
-    const newDoc = req.body;
-    const collName = `_${resourceConfig.name}`;
+    // @TODO: Update particular doc
 
-    const doc = db(collName).insert(newDoc);
-    return response.ok(doc)(res);
+    return response.ok({})(res);
   } catch (err) {
-    logger.error(err);
     return response.internalError()(res);
   }
 }

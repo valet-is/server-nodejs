@@ -1,6 +1,9 @@
 /* eslint-disable global-require */
 /* eslint-disable import/no-dynamic-require */
-import { specPath } from 'config';
+import path from 'path';
+
+const root = path.resolve(__dirname, '../../../');
+const specPath = path.join(root, 'spec.json');
 
 let spec = null;
 
@@ -16,4 +19,11 @@ export const getStatus = () => {
     ...(spec.api || {}),
     status: 'active',
   };
+};
+
+export const findResource = (namespace, responseName) => {
+  if (!spec) load();
+
+  const resources = (spec.resources || {})[namespace] || {};
+  return resources[responseName];
 };

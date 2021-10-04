@@ -26,49 +26,47 @@
   "resources": {
     "api": {
       "posts": {
-        "posts": {
-          "type": "default",
-          "private": false,
-          "protected": false,
-          "published": true,
-          "description": null,
-          "methods": {
-            "get": {},
-            "post": {},
-            "put": {},
-            "patch": {},
-            "delete": {}
-          },
-          "schema": "$posts"
+        "type": "default",
+        "private": false,
+        "protected": false,
+        "published": true,
+        "description": null,
+        "methods": {
+          "get": {},
+          "post": {},
+          "put": {},
+          "patch": {},
+          "delete": {}
         },
-        "comments": {
-          "type": "default",
-          "private": true,
-          "protected": false,
-          "published": true,
-          "description": null,
-          "methods": {
-            "get": {},
-            "post": {},
-            "patch": {},
-            "delete": {}
-          },
-          "schema": "$comments"
+        "schema": "$posts"
+      },
+      "comments": {
+        "type": "default",
+        "private": true,
+        "protected": false,
+        "published": true,
+        "description": null,
+        "methods": {
+          "get": {},
+          "post": {},
+          "patch": {},
+          "delete": {}
         },
-        "users": {
-          "type": "default",
-          "private": true,
-          "protected": true,
-          "published": true,
-          "description": null,
-          "methods": {
-            "get": {},
-            "post": {},
-            "patch": {},
-            "delete": {}
-          },
-          "schema": "$users"
-        }
+        "schema": "$comments"
+      },
+      "users": {
+        "type": "default",
+        "private": true,
+        "protected": true,
+        "published": true,
+        "description": null,
+        "methods": {
+          "get": {},
+          "post": {},
+          "patch": {},
+          "delete": {}
+        },
+        "schema": "$users"
       }
     },
     "schemas": {

@@ -1,49 +1,33 @@
 /* eslint no-param-reassign: 0 */
-import { db } from '@core/database';
 import * as response from '@app/utils/http';
-import logger from '@core/utils/logger';
 import * as customHanlders from '@app/handlers/custom';
+
 import proxy from './proxy';
 
 export default function get(req, res) {
   try {
-    const { resourceConfig, query } = req;
-    const { search, offset, limit } = query || {};
+    const { resourceConfig } = req;
 
+    // Check if the resource is a proxy,
+    // and if so, proxy the request to the target
     if (resourceConfig.type === 'proxy') {
-      return proxy(resourceConfig, req, res);
+      return proxy(resourceConfig)(req, res);
     }
 
+    // Check if the resource is a custom handler
+    // and if so, call the handler
     if (resourceConfig.type === 'custom') {
       return customHanlders[resourceConfig.type](req, res);
     }
 
-    let docs = [];
+    // @TODO: Fetch all the docs from the database asscoaited with particular resource.
+    // @TODO: Implement search functionality.
+    // @TODO: Implement pagination.
 
-    const collName = `_${resourceConfig.name}`;
-    docs = db(collName).find();
+    // const { search, offset, limit } = req.query;
 
-    // search
-    // TODO: Move this logic to JsonDB
-    if (search && search !== '') {
-      const [field, keyword] = search.split('|');
-      const _docs = docs.filter((doc) => {
-        if (!doc[field] || !keyword) return false;
-        return doc[field].includes(keyword);
-      });
-      docs = _docs;
-    }
-    // pagination
-    // TODO: Move this logic to JsonDB
-    if (offset && limit) {
-      const start = Number(offset);
-      const end = Number(offset) + Number(limit);
-      docs = docs.slice(start, end);
-    }
-
-    return response.ok(docs)(res);
+    return response.ok([])(res);
   } catch (err) {
-    logger.error(err);
-    return response.internalError()(res);
+    return response.internalError(err)(res);
   }
 }

@@ -13,7 +13,7 @@ import * as bootstrapHandler from '@core/handlers/bootstrap';
 // import coreRoutes from '@core/routes';
 
 // import authRoutes from '@app/routes/auth';
-// import apiRoutes from '@app/routes/api';
+import apiRoutes from '@app/routes/api';
 // import oauthRoutes from '@app/routes/oauth';
 
 import logger from '@app/utils/logger';
@@ -45,7 +45,7 @@ app.post('/bootstrap', bootstrapHandler.post);
 
 // app.use('/auth', authRoutes);
 // app.use('/core', coreRoutes);
-// app.use('/api', apiRoutes);
+app.use('/api', apiRoutes);
 // app.use('/oauth', oauthRoutes);
 
 app.use(express.static(path.join(path.join(__dirname, '..', 'public'))));
