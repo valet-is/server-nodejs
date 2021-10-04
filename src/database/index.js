@@ -1,13 +1,30 @@
-/* eslint-disable prefer-destructuring */
-import { dbConnection } from 'config';
+import { log } from '@core/utils/events';
 
 import * as jsondb from './jsondb';
 import * as mongodb from './mongodb';
 
-export const db = dbConnection === 'jsondb' ? jsondb.db : mongodb.db;
+export async function connect() {
+  const dbConn = process.env.DB_CONNECTION;
+  log('database:start', { dbConn });
 
-// TODO Add mongo support
-export const createCollection =
-  dbConnection === 'jsondb'
-    ? jsondb.createCollection
-    : mongodb.createCollection;
+  switch (dbConn) {
+    case 'jsondb':
+      if (!jsondb.get()) {
+        await jsondb.connect();
+        log('database:connected', { dbConn });
+        break;
+      }
+      log('database:started', { dbConn });
+      break;
+    case 'mongodb':
+      if (!mongodb.get()) {
+        await mongodb.connect();
+        log('database:connected', { dbConn });
+        break;
+      }
+      log('database:started', { dbConn });
+      break;
+    default:
+      throw new Error('database:error-unsupported');
+  }
+}

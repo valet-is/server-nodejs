@@ -1,0 +1,8 @@
+{
+  "bootstrap:start": "Starting server...",
+  "bootstrap:error-env": "`.env` file is missing!",
+  "database:start": "Starting database <%= dbConn %>..",
+  "database:started": "+ <%= dbConn %> started.",
+  "database:connected": "+ <%= dbConn %> connected.",
+  "database:error-unsupported": "Unsupported database connection."
+}

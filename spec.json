@@ -1,0 +1,151 @@
+{
+  "api:spec": {
+    "version": "1.0"
+  },
+  "api": {
+    "name": "Valet",
+    "description": "Valet API",
+    "baseUrl": "http://localhost:5000",
+    "contact": {
+      "name": "John Doe",
+      "email": "john@example.com",
+      "url": null
+    },
+    "license": {
+      "name": "The MIT License",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "response": {
+    "headers": {
+      "Content-Type": "application/json",
+      "Authorization": null
+    }
+  },
+  "resources": {
+    "api": {
+      "posts": {
+        "posts": {
+          "type": "default",
+          "private": false,
+          "protected": false,
+          "published": true,
+          "description": null,
+          "methods": {
+            "get": {},
+            "post": {},
+            "put": {},
+            "patch": {},
+            "delete": {}
+          },
+          "schema": "$posts"
+        },
+        "comments": {
+          "type": "default",
+          "private": true,
+          "protected": false,
+          "published": true,
+          "description": null,
+          "methods": {
+            "get": {},
+            "post": {},
+            "patch": {},
+            "delete": {}
+          },
+          "schema": "$comments"
+        },
+        "users": {
+          "type": "default",
+          "private": true,
+          "protected": true,
+          "published": true,
+          "description": null,
+          "methods": {
+            "get": {},
+            "post": {},
+            "patch": {},
+            "delete": {}
+          },
+          "schema": "$users"
+        }
+      }
+    },
+    "schemas": {
+      "posts": {
+        "id": {
+          "type": "number",
+          "length": 64,
+          "required": true,
+          "unique": true,
+          "auto": true
+        },
+        "date": {
+          "type": "timestamp",
+          "required": true
+        },
+        "title": {
+          "type": "string",
+          "length": 255,
+          "required": true
+        },
+        "body": {
+          "type": "string",
+          "length": 65535,
+          "required": true
+        },
+        "@comments": {
+          "type": "$comments",
+          "aggregate": {
+            "id": "$id"
+          }
+        }
+      },
+      "comments": {
+        "id": {
+          "type": "number",
+          "length": 64,
+          "required": true,
+          "unique": true,
+          "auto": true
+        },
+        "postId": {
+          "type": "number",
+          "required": true
+        },
+        "user": {
+          "type": "$user"
+        },
+        "comment": {
+          "type": "string",
+          "length": 255,
+          "required": true
+        },
+        "date": {
+          "type": "timestamp",
+          "required": true
+        }
+      },
+      "users": {
+        "id": {
+          "type": "number",
+          "length": 64,
+          "required": true,
+          "unique": true,
+          "auto": true
+        },
+        "name": {
+          "type": "string",
+          "length": 24,
+          "required": true
+        },
+        "email": {
+          "type": "email",
+          "required": true
+        },
+        "avatarUrl": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

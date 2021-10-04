@@ -1,4 +1,4 @@
-import { db } from 'database';
+import { db } from '@core/database';
 import { baseUrl } from 'config';
 
 const namespace = 'core';

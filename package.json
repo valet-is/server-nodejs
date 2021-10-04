@@ -1,12 +1,12 @@
 {
   "name": "@valet-is/server-nodejs",
   "version": "1.0.0-alpha.0",
-  "main": "./build/bin/bootstrap.js",
+  "main": "./build/bootstrap.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=development nodemon --exec babel-node ./src/bin/bootstrap.js",
+    "start": "cross-env NODE_ENV=development nodemon --exec babel-node ./src/bootstrap.js",
     "prestart:prod": "npm run build",
-    "start:prod": "cross-env NODE_ENV=production node ./build/bin/bootstrap.js",
-    "debug": "cross-env NODE_ENV=debug nodemon --inspect --exec babel-node ./src/bin/bootstrap.js",
+    "start:prod": "cross-env NODE_ENV=production node ./build/bootstrap.js",
+    "debug": "cross-env NODE_ENV=debug nodemon --inspect --exec babel-node ./src/bootstrap.js",
     "prebuild": "rm -rf build",
     "build": "babel ./src --out-dir build --copy-files",
     "lint": "eslint 'src/**/*.js'",
@@ -30,6 +30,7 @@
   "homepage": "https://github.com/valet-is/central#readme",
   "dependencies": {
     "@backdropjs/jsondb": "^0.0.3",
+    "@valet-is/jsondb": "^1.0.0-alpha.1",
     "axios": "^0.21.1",
     "bcrypt": "^5.0.1",
     "core-js": "^3.15.1",

@@ -1,8 +1,8 @@
 import forEach from 'lodash/forEach';
 
-import { db } from 'database';
-import { response } from 'utils/http';
-import * as customHanlders from 'handlers/custom';
+import { db } from '@core/database';
+import { response } from '@core/utils/http';
+import * as customHanlders from '@core/handlers/custom';
 
 export default function getSingle(req, res) {
   try {

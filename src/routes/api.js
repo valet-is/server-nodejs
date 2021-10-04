@@ -1,8 +1,8 @@
 import express from 'express';
 
-import * as apiMiddlewares from 'middlewares/api';
-import * as handlers from 'handlers';
-import * as apiHandler from 'handlers/api';
+import * as apiMiddlewares from '@core/middlewares/api';
+import * as handlers from '@core/handlers';
+import * as apiHandler from '@core/handlers/api';
 
 const router = express.Router();
 
