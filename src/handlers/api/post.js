@@ -1,7 +1,7 @@
 import { db } from '@core/database';
-import { response } from '@core/utils/http';
+import * as response from '@app/utils/http';
 import logger from '@core/utils/logger';
-import * as customHanlders from '@core/handlers/custom';
+import * as customHanlders from '@app/handlers/custom';
 
 export default function post(req, res) {
   try {
@@ -15,9 +15,9 @@ export default function post(req, res) {
     const collName = `_${resourceConfig.name}`;
 
     const doc = db(collName).insert(newDoc);
-    return response.ok(res, doc);
+    return response.ok(doc)(res);
   } catch (err) {
     logger.error(err);
-    return response.internalError(res);
+    return response.internalError()(res);
   }
 }

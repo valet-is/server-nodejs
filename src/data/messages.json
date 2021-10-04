@@ -1,5 +1,6 @@
 {
   "bootstrap:start": "Starting server...",
+  "bootstrap:error-spec": "`spec.json` is missing!",
   "bootstrap:error-env": "`.env` file is missing!",
   "database:start": "Starting database <%= dbConn %>..",
   "database:started": "+ <%= dbConn %> started.",

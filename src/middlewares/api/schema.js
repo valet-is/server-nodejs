@@ -2,7 +2,7 @@
 import pick from 'lodash/pick';
 // import forEach from 'lodash/forEach';
 
-import { response } from '@core/utils/http';
+import * as response from '@app/utils/http';
 
 const validate = (inputs, schema) => {
   const valid = true;
@@ -51,7 +51,7 @@ export default function validateSchema(req, res, next) {
 
   const [valid, errors] = validate(inputs, schema);
 
-  if (!valid) return response.bad(res);
+  if (!valid) return response.bad()(res);
 
   return next();
 }

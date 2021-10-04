@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { db } from '@core/database';
-import { response } from '@core/utils/http';
+import * as response from '@app/utils/http';
 import uniqid from 'uniqid';
 
 import { jwtSecret } from 'config';
@@ -12,15 +12,15 @@ export function get(req, res) {
     const user = db('users').findOne({ token });
 
     // No user found
-    if (!user) return response.unauthorized(res);
+    if (!user) return response.unauthorized()(res);
 
     // If user found, change token to expire
     const _user = { ...user, status: 1, token: uniqid() };
     db('users').updateOne({ token }, _user);
-    // return response.ok(res);
+    // return response.ok()(res);
     return res.redirect('/');
   } catch (err) {
-    return response.internalError(res);
+    return response.internalError()(res);
   }
 }
 
@@ -32,13 +32,13 @@ export function post(req, res) {
     const user = db('users').findOne({ userName });
     const validUser = bcrypt.compareSync(password, user.password);
 
-    if (!validUser) return response.unauthorized(res);
+    if (!validUser) return response.unauthorized()(res);
 
     delete user.password;
     delete user.token;
     const token = jwt.sign(user, jwtSecret);
-    return response.ok(res, { user, token });
+    return response.ok({ user, token })(res);
   } catch (err) {
-    return response.internalError(res);
+    return response.internalError()(res);
   }
 }

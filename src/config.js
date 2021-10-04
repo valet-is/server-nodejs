@@ -11,6 +11,8 @@ export const mediaPath = path.join(__dirname, '..', mediaDir);
 export const filesToBeIgnored = ['.DS_Store'];
 export const reservedResourceNames = ['config', 'resources', 'users'];
 
+export const specPath = path.join(__dirname, '..', 'spec.json');
+
 export const dbConnection = process.env.DB_CONNECTION || 'jsondb';
 export const dbMongoUrl = process.env.DB_MONGO_URL;
 export const jsonDbPath = path.join(__dirname, '..');

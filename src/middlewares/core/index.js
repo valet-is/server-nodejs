@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 
 import { db } from '@core/database';
-import { response } from '@core/utils/http';
+import * as response from '@app/utils/http';
 
 import { jwtSecret } from 'config';
 
@@ -16,10 +16,10 @@ export function auth(req, res, next) {
     const _user = db('users').findOne({ _id: user._id });
 
     if (!_user || _user.role !== user.role || _user.status !== user.status) {
-      return response.forbidden(res);
+      return response.forbidden()(res);
     }
 
     return next();
   }
-  return response.unauthorized(res);
+  return response.unauthorized()(res);
 }

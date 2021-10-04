@@ -1,12 +1,12 @@
 {
   "name": "@valet-is/server-nodejs",
   "version": "1.0.0-alpha.0",
-  "main": "./build/bootstrap.js",
+  "main": "./build/bin/bootstrap.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=development nodemon --exec babel-node ./src/bootstrap.js",
+    "start": "cross-env NODE_ENV=development nodemon --exec babel-node ./src/bin/bootstrap.js",
     "prestart:prod": "npm run build",
-    "start:prod": "cross-env NODE_ENV=production node ./build/bootstrap.js",
-    "debug": "cross-env NODE_ENV=debug nodemon --inspect --exec babel-node ./src/bootstrap.js",
+    "start:prod": "cross-env NODE_ENV=production node ./build/bin/bootstrap.js",
+    "debug": "cross-env NODE_ENV=debug nodemon --inspect --exec babel-node ./src/bin/bootstrap.js",
     "prebuild": "rm -rf build",
     "build": "babel ./src --out-dir build --copy-files",
     "lint": "eslint 'src/**/*.js'",

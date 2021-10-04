@@ -1,6 +1,6 @@
 import { db } from '@core/database';
-import { response } from '@core/utils/http';
-import * as customHanlders from '@core/handlers/custom';
+import * as response from '@app/utils/http';
+import * as customHanlders from '@app/handlers/custom';
 
 export default function put(req, res) {
   const { resourceConfig } = req;
@@ -13,7 +13,7 @@ export default function put(req, res) {
   const { id: _id } = req.params;
 
   const doc = db(collName).findOne({ _id });
-  if (!doc) return response.notFound(res);
+  if (!doc) return response.notFound()(res);
 
   const newDoc = {
     ...req.body,
@@ -21,6 +21,6 @@ export default function put(req, res) {
   };
 
   const updatedDoc = db(collName).updateOne({ _id }, newDoc);
-  if (!updatedDoc) return response.internalError(res);
-  return response.ok(res, updatedDoc);
+  if (!updatedDoc) return response.internalError()(res);
+  return response.ok(updatedDoc)(res);
 }

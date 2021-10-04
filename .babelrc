@@ -6,7 +6,9 @@
       {
         "alias": {
           "config": "./src/config",
-          "^@core/(.+)": "./src/\\1"
+          "data": "./src/data",
+          "^@core/(.+)": "./src/@core/\\1",
+          "^@app/(.+)": "./src/\\1"
         }
       }
     ]

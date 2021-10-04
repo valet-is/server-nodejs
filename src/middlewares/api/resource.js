@@ -1,5 +1,5 @@
 import { db } from '@core/database';
-import { response } from '@core/utils/http';
+import * as response from '@app/utils/http';
 
 const sanatize = (str) => str.replace('/', '');
 
@@ -12,7 +12,7 @@ export default function validateResource(req, res, next) {
     namespace,
     status: 'published',
   });
-  if (!resourceConfig) return response.notFound(res);
+  if (!resourceConfig) return response.notFound()(res);
 
   req.resourceConfig = resourceConfig;
   return next();

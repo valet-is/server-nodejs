@@ -1,8 +1,8 @@
 import forEach from 'lodash/forEach';
 
 import { db } from '@core/database';
-import { response } from '@core/utils/http';
-import * as customHanlders from '@core/handlers/custom';
+import * as response from '@app/utils/http';
+import * as customHanlders from '@app/handlers/custom';
 
 export default function getSingle(req, res) {
   try {
@@ -15,7 +15,7 @@ export default function getSingle(req, res) {
     const collName = `_${resourceConfig.name}`;
 
     const doc = db(collName).findOne({ _id: req.params.id });
-    if (!doc) return response.notFound(res);
+    if (!doc) return response.notFound()(res);
 
     // Process relationship configs
     const { schema } = resourceConfig;
@@ -31,8 +31,8 @@ export default function getSingle(req, res) {
       }
     });
 
-    return response.ok(res, doc);
+    return response.ok(doc)(res);
   } catch (err) {
-    return response.internalError(res);
+    return response.internalError()(res);
   }
 }

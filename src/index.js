@@ -8,15 +8,15 @@ import rateLimit from 'express-rate-limit';
 import mongoSanitize from 'express-mongo-sanitize';
 import hpp from 'hpp';
 
-import * as pingHandler from '@core/handlers/ping';
+import * as statusHandler from '@core/handlers/status';
 import * as bootstrapHandler from '@core/handlers/bootstrap';
+// import coreRoutes from '@core/routes';
 
-import authRoutes from '@core/routes/auth';
-import coreRoutes from '@core/routes/core';
-import apiRoutes from '@core/routes/api';
-import oauthRoutes from '@core/routes/oauth';
+// import authRoutes from '@app/routes/auth';
+// import apiRoutes from '@app/routes/api';
+// import oauthRoutes from '@app/routes/oauth';
 
-import logger from '@core/utils/logger';
+import logger from '@app/utils/logger';
 
 import { port } from 'config';
 
@@ -40,13 +40,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(morgan('dev'));
 
-app.get('/status', pingHandler.get);
+app.get('/status', statusHandler.get);
 app.post('/bootstrap', bootstrapHandler.post);
 
-app.use('/auth', authRoutes);
-app.use('/core', coreRoutes);
-app.use('/api', apiRoutes);
-app.use('/oauth', oauthRoutes);
+// app.use('/auth', authRoutes);
+// app.use('/core', coreRoutes);
+// app.use('/api', apiRoutes);
+// app.use('/oauth', oauthRoutes);
 
 app.use(express.static(path.join(path.join(__dirname, '..', 'public'))));
 

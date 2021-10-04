@@ -4,6 +4,7 @@
   },
   "api": {
     "name": "Valet",
+    "version": "1.0",
     "description": "Valet API",
     "baseUrl": "http://localhost:5000",
     "contact": {

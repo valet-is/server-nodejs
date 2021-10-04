@@ -1,5 +1,5 @@
 import { db } from '@core/database';
-import { response } from '@core/utils/http';
+import * as response from '@app/utils/http';
 
 import { baseUrl } from 'config';
 
@@ -14,8 +14,8 @@ export function get(req, res) {
         baseUrl,
       };
     }
-    response.ok(res, toResponse);
+    response.ok(toResponse)(res);
   } catch (err) {
-    response.ok(res, null);
+    response.ok(null)(res);
   }
 }
