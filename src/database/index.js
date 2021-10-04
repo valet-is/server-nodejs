@@ -1,4 +1,4 @@
-import { log } from '@core/utils/events';
+import { log } from '@app/utils/events';
 
 import * as jsondb from './jsondb';
 import * as mongodb from './mongodb';

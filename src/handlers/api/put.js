@@ -1,6 +1,6 @@
-import { db } from '@core/database';
-import { response } from '@core/utils/http';
-import * as customHanlders from '@core/handlers/custom';
+import { db } from '@app/database';
+import { response } from '@app/utils/http';
+import * as customHanlders from '@app/handlers/custom';
 
 export default function put(req, res) {
   const { resourceConfig } = req;

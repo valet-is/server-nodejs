@@ -2,7 +2,7 @@
 import pick from 'lodash/pick';
 // import forEach from 'lodash/forEach';
 
-import { response } from '@core/utils/http';
+import { response } from '@app/utils/http';
 
 const validate = (inputs, schema) => {
   const valid = true;

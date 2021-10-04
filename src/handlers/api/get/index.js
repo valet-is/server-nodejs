@@ -1,8 +1,8 @@
 /* eslint no-param-reassign: 0 */
-import { db } from '@core/database';
-import { response } from '@core/utils/http';
-import logger from '@core/utils/logger';
-import * as customHanlders from '@core/handlers/custom';
+import { db } from '@app/database';
+import { response } from '@app/utils/http';
+import logger from '@app/utils/logger';
+import * as customHanlders from '@app/handlers/custom';
 import proxy from './proxy';
 
 export default function get(req, res) {

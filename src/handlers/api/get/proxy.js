@@ -1,5 +1,5 @@
 import fetch from 'node-fetch';
-import { response } from '@core/utils/http';
+import { response } from '@app/utils/http';
 
 export default function proxy({ endpoint }, req, res) {
   fetch(endpoint)

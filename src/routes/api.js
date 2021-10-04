@@ -1,40 +1,40 @@
 import express from 'express';
 
-import * as apiMiddlewares from '@core/middlewares/api';
-import * as handlers from '@core/handlers';
-import * as apiHandler from '@core/handlers/api';
+import * as apiMiddlewares from '@app/middlewares/api';
+import * as handlers from '@app/handlers';
+import * as apiHandlers from '@app/handlers/api';
 
 const router = express.Router();
 
 router.get(
   '/:resource/:id',
   [apiMiddlewares.auth, apiMiddlewares.resource],
-  apiHandler.getSingle
+  apiHandlers.getSingle
 );
 router.get(
   '/:resource/',
   [apiMiddlewares.auth, apiMiddlewares.resource],
-  apiHandler.get
+  apiHandlers.get
 );
 router.post(
   '/:resource',
   [apiMiddlewares.auth, apiMiddlewares.resource, apiMiddlewares.schema],
-  apiHandler.post
+  apiHandlers.post
 );
 router.put(
   '/:resource/:id',
   [apiMiddlewares.auth, apiMiddlewares.resource, apiMiddlewares.schema],
-  apiHandler.put
+  apiHandlers.put
 );
 router.patch(
   '/:resource/:id',
   [apiMiddlewares.auth, apiMiddlewares.resource, apiMiddlewares.schema],
-  apiHandler.patch
+  apiHandlers.patch
 );
 router.delete(
   '/:resource/:id',
   [apiMiddlewares.auth, apiMiddlewares.resource],
-  apiHandler.delete
+  apiHandlers.delete
 );
 
 router.get('/', handlers.api);

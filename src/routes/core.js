@@ -1,14 +1,14 @@
 import express from 'express';
 import fileUpload from 'express-fileupload';
 
-import * as coreMiddlewares from '@core/middlewares/core';
+import * as coreMiddlewares from '@app/middlewares/core';
 
-import * as handlers from '@core/handlers';
-import * as resourceHandler from '@core/handlers/core/resource';
-import * as usersHandler from '@core/handlers/core/users';
-import * as configHandler from '@core/handlers/core/config';
-import * as mediaHandler from '@core/handlers/core/media';
-import * as emailHandler from '@core/handlers/core/email';
+import * as handlers from '@app/handlers';
+import * as resourceHandler from '@app/handlers/core/resource';
+import * as usersHandler from '@app/handlers/core/users';
+import * as configHandler from '@app/handlers/core/config';
+import * as mediaHandler from '@app/handlers/core/media';
+import * as emailHandler from '@app/handlers/core/email';
 
 const router = express.Router();
 

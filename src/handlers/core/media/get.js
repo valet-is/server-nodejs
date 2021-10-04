@@ -1,7 +1,7 @@
 import { readdirSync } from 'fs';
 
-import { response } from '@core/utils/http';
-import { ensureDirSync } from '@core/utils/fs';
+import { response } from '@app/utils/http';
+import { ensureDirSync } from '@app/utils/fs';
 
 import { mediaPath, baseUrl, mediaDir, filesToBeIgnored } from 'config';
 

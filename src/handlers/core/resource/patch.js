@@ -1,5 +1,5 @@
-import { response } from '@core/utils/http';
-import { db } from '@core/database';
+import { response } from '@app/utils/http';
+import { db } from '@app/database';
 
 export default function getSingle(req, res) {
   // TODO Validate request body

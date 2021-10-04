@@ -1,5 +1,5 @@
-import { db } from '@core/database';
-import { response } from '@core/utils/http';
+import { db } from '@app/database';
+import { response } from '@app/utils/http';
 
 import { baseUrl } from 'config';
 

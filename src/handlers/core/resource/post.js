@@ -1,5 +1,5 @@
-import { response } from '@core/utils/http';
-import { db, createCollection } from '@core/database';
+import { response } from '@app/utils/http';
+import { db, createCollection } from '@app/database';
 
 export default function post(req, res) {
   // TODO Validate request body

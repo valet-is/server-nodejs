@@ -1,8 +1,8 @@
 import EventEmitter from 'events';
 import template from 'lodash/template';
 
-import logger from '@core/utils/logger';
-import messages from '@core/data/messages.json';
+import logger from '@app/utils/logger';
+import messages from '@app/data/messages.json';
 
 const eventEmitter = new EventEmitter();
 export default eventEmitter;

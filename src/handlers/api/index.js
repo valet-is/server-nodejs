@@ -1,4 +1,4 @@
-import { db } from '@core/database';
+import { db } from '@app/database';
 
 import { baseUrl } from 'config';
 

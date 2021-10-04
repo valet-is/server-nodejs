@@ -2,9 +2,9 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import uniqid from 'uniqid';
 
-import { db } from '@core/database';
-import { response } from '@core/utils/http';
-import Mailer from '@core/utils/email';
+import { db } from '@app/database';
+import { response } from '@app/utils/http';
+import Mailer from '@app/utils/email';
 
 import { jwtSecret, salt, baseUrl } from 'config';
 
