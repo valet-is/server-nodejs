@@ -1,30 +1,30 @@
-import logger from '@core/utils/logger';
+import { log } from '@core/utils/events';
 
 import * as jsondb from './jsondb';
 import * as mongodb from './mongodb';
 
-export default async function connect() {
+export async function connect() {
   const dbConn = process.env.DB_CONNECTION;
-  logger.log(`Starting database ${dbConn}..`);
+  log('database:start', { dbConn });
 
   switch (dbConn) {
     case 'jsondb':
       if (!jsondb.get()) {
         await jsondb.connect();
-        logger.log(`+ ${dbConn} connected.`);
+        log('database:connected', { dbConn });
         break;
       }
-      logger.log(`+ ${dbConn} started.`);
+      log('database:started', { dbConn });
       break;
     case 'mongodb':
       if (!mongodb.get()) {
         await mongodb.connect();
-        logger.log(`+ ${dbConn} connected.`);
+        log('database:connected', { dbConn });
         break;
       }
-      logger.log(`+ ${dbConn} started.`);
+      log('database:started', { dbConn });
       break;
     default:
-      throw new Error(`Error: Unsupported database connection: ${dbConn}`);
+      throw new Error('database:error-unsupported');
   }
 }

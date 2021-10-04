@@ -22,7 +22,7 @@ import { port } from 'config';
 
 const app = express();
 
-app.use('/media', express.static('./media'));
+app.use('/assets', express.static('./assets'));
 
 app.use(cors());
 app.use(helmet());
@@ -40,7 +40,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(morgan('dev'));
 
-app.get('/ping', pingHandler.get);
+app.get('/status', pingHandler.get);
 app.post('/bootstrap', bootstrapHandler.post);
 
 app.use('/auth', authRoutes);

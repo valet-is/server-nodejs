@@ -4,31 +4,30 @@ import 'regenerator-runtime/runtime';
 
 import path from 'path';
 
-import db from '@core/database';
+import * as db from '@core/database';
 import { isFileExists } from '@core/utils/fs';
-import logger from '@core/utils/logger';
+import { log, error } from '@core/utils/events';
 
 const root = path.resolve(__dirname, '../');
 const dotEnvPath = path.join(root, '.env');
 
 const end = (err) => {
-  logger.error(err);
+  error(err.message);
   process.exit(1);
 };
 
 export default async function bootstrap() {
   try {
-    logger.log('Starting server...', dotEnvPath);
+    log('bootstrap:start');
 
-    // Check for `.env` and load environment variables from it if it exists.
+    // Check for `.env` and load environment variables if exists.
     if (!isFileExists(dotEnvPath)) {
-      throw new Error('Error: `.env` file is missing!.');
+      throw new Error('bootstrap:error-env');
     }
     require('dotenv').config();
 
-    // Ensure the database connection is up and running.
-    await db();
-
+    // Ensure database connection is ready to use.
+    await db.connect();
     require('.');
   } catch (err) {
     end(err);
