@@ -1,7 +1,7 @@
 import express from 'express';
 import axios from 'axios';
 
-import { db } from '@app/database';
+import { db } from '@core/database';
 import { oAuthGitHubClientId, oAuthGitHubClientSecret } from 'config';
 
 const router = express.Router();

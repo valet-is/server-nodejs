@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 
 import { db } from '@core/database';
-import * as response from '@app/utils/http';
+import * as response from '@core/utils/http';
 
 import { jwtSecret } from 'config';
 

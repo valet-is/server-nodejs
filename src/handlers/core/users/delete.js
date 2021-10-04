@@ -1,8 +1,0 @@
-import { db } from '@app/database';
-import { response } from '@app/utils/http';
-
-export default function del(req, res) {
-  const { id } = req.params;
-  const userDeleted = db('users').remove({ _id: id });
-  return response.ok(res, userDeleted);
-}

@@ -1,5 +1,5 @@
-import { db } from '@app/database';
-import { response } from '@app/utils/http';
+import { db } from '@core/database';
+import * as response from '@app/utils/http';
 import * as customHanlders from '@app/handlers/custom';
 
 export default function del(req, res) {
@@ -13,6 +13,6 @@ export default function del(req, res) {
   const collName = `_${resourceConfig.name}`;
 
   const success = db(collName).remove({ _id });
-  if (!success) return response.internalError(res);
-  return response.ok(res);
+  if (!success) return response.internalError()(res);
+  return response.ok()(res);
 }

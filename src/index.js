@@ -8,13 +8,13 @@ import rateLimit from 'express-rate-limit';
 import mongoSanitize from 'express-mongo-sanitize';
 import hpp from 'hpp';
 
-import * as statusHandler from '@app/handlers/status';
-import * as bootstrapHandler from '@app/handlers/bootstrap';
+import * as statusHandler from '@core/handlers/status';
+import * as bootstrapHandler from '@core/handlers/bootstrap';
+// import coreRoutes from '@core/routes';
 
-import authRoutes from '@app/routes/auth';
-import coreRoutes from '@app/routes/core';
-import apiRoutes from '@app/routes/api';
-import oauthRoutes from '@app/routes/oauth';
+// import authRoutes from '@app/routes/auth';
+// import apiRoutes from '@app/routes/api';
+// import oauthRoutes from '@app/routes/oauth';
 
 import logger from '@app/utils/logger';
 
@@ -43,10 +43,10 @@ app.use(morgan('dev'));
 app.get('/status', statusHandler.get);
 app.post('/bootstrap', bootstrapHandler.post);
 
-app.use('/auth', authRoutes);
-app.use('/core', coreRoutes);
-app.use('/api', apiRoutes);
-app.use('/oauth', oauthRoutes);
+// app.use('/auth', authRoutes);
+// app.use('/core', coreRoutes);
+// app.use('/api', apiRoutes);
+// app.use('/oauth', oauthRoutes);
 
 app.use(express.static(path.join(path.join(__dirname, '..', 'public'))));
 

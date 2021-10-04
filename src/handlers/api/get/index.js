@@ -1,7 +1,7 @@
 /* eslint no-param-reassign: 0 */
-import { db } from '@app/database';
-import { response } from '@app/utils/http';
-import logger from '@app/utils/logger';
+import { db } from '@core/database';
+import * as response from '@app/utils/http';
+import logger from '@core/utils/logger';
 import * as customHanlders from '@app/handlers/custom';
 import proxy from './proxy';
 
@@ -41,9 +41,9 @@ export default function get(req, res) {
       docs = docs.slice(start, end);
     }
 
-    return response.ok(res, docs);
+    return response.ok(docs)(res);
   } catch (err) {
     logger.error(err);
-    return response.internalError(res);
+    return response.internalError()(res);
   }
 }
