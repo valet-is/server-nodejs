@@ -4,29 +4,27 @@ import * as jsondb from './jsondb';
 import * as mongodb from './mongodb';
 
 export default async function connect() {
-  const { DB_CONNECTION } = process.env;
-  logger.log(`Starting database ${DB_CONNECTION}..`);
+  const dbConn = process.env.DB_CONNECTION;
+  logger.log(`Starting database ${dbConn}..`);
 
-  switch (DB_CONNECTION) {
+  switch (dbConn) {
     case 'jsondb':
       if (!jsondb.get()) {
         await jsondb.connect();
-        logger.log(`+ ${DB_CONNECTION} connected.`);
+        logger.log(`+ ${dbConn} connected.`);
         break;
       }
-      logger.log(`+ ${DB_CONNECTION} started.`);
+      logger.log(`+ ${dbConn} started.`);
       break;
     case 'mongodb':
       if (!mongodb.get()) {
         await mongodb.connect();
-        logger.log(`+ ${DB_CONNECTION} connected.`);
+        logger.log(`+ ${dbConn} connected.`);
         break;
       }
-      logger.log(`+ ${DB_CONNECTION} started.`);
+      logger.log(`+ ${dbConn} started.`);
       break;
     default:
-      throw new Error(
-        `Error: Unsupported database connection: ${DB_CONNECTION}`
-      );
+      throw new Error(`Error: Unsupported database connection: ${dbConn}`);
   }
 }

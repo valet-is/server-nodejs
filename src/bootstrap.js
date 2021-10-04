@@ -8,7 +8,7 @@ import db from '@core/database';
 import { isFileExists } from '@core/utils/fs';
 import logger from '@core/utils/logger';
 
-const root = path.resolve(__dirname, '../../');
+const root = path.resolve(__dirname, '../');
 const dotEnvPath = path.join(root, '.env');
 
 const end = (err) => {
@@ -18,19 +18,18 @@ const end = (err) => {
 
 export default async function bootstrap() {
   try {
-    logger.log('Starting server...');
+    logger.log('Starting server...', dotEnvPath);
 
     // Check for `.env` and load environment variables from it if it exists.
     if (!isFileExists(dotEnvPath)) {
-      // throw new Error('Error: `.env` file is missing!.');
-      end('Error: `.env` file is missing!.');
+      throw new Error('Error: `.env` file is missing!.');
     }
     require('dotenv').config();
 
     // Ensure the database connection is up and running.
     await db();
 
-    require('../');
+    require('.');
   } catch (err) {
     end(err);
   }
