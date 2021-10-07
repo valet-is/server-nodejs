@@ -4,9 +4,9 @@ import 'regenerator-runtime/runtime';
 
 import path from 'path';
 
-import * as db from '@core/database';
-import { log, error } from '@core/utils/events';
-import { isFileExists } from '@core/utils/fs';
+import * as db from '@valet/database';
+import { log, error } from '@valet/utils/events';
+import { isFileExists } from '@valet/utils/fs';
 
 const root = path.resolve(__dirname, '../../');
 const dotEnvPath = path.join(root, '.env');

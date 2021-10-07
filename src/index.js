@@ -8,15 +8,8 @@ import rateLimit from 'express-rate-limit';
 import mongoSanitize from 'express-mongo-sanitize';
 import hpp from 'hpp';
 
-import * as statusHandler from '@core/handlers/status';
-import * as bootstrapHandler from '@core/handlers/bootstrap';
-// import coreRoutes from '@core/routes';
-
-// import authRoutes from '@app/routes/auth';
-import apiRoutes from '@app/routes/api';
-// import oauthRoutes from '@app/routes/oauth';
-
-import logger from '@app/utils/logger';
+import routes from '@valet/routes';
+import { log } from '@valet/utils/events';
 
 import { port } from 'config';
 
@@ -40,20 +33,14 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(morgan('dev'));
 
-app.get('/status', statusHandler.get);
-app.post('/bootstrap', bootstrapHandler.post);
-
-// app.use('/auth', authRoutes);
-// app.use('/core', coreRoutes);
-app.use('/api', apiRoutes);
-// app.use('/oauth', oauthRoutes);
-
 app.use(express.static(path.join(path.join(__dirname, '..', 'public'))));
+
+app.use('/', routes);
 
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
 });
 
 app.listen(port, () => {
-  logger.log(`Server is running on ${port}`);
+  log('bootstrap:server:started', { port });
 });

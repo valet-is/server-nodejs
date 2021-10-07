@@ -7,7 +7,7 @@
         "alias": {
           "config": "./src/config",
           "data": "./src/data",
-          "^@core/(.+)": "./src/@core/\\1",
+          "^@valet/(.+)": "./src/@valet/\\1",
           "^@app/(.+)": "./src/\\1"
         }
       }

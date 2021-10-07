@@ -1,1 +1,1 @@
-export * from '@core/utils/http';
+export * from '@valet/utils/http';

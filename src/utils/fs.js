@@ -1,1 +1,1 @@
-export * from '@core/utils/fs';
+export * from '@valet/utils/fs';

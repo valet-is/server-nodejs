@@ -5,5 +5,6 @@
   "database:start": "Starting database <%= dbConn %>..",
   "database:started": "+ <%= dbConn %> started.",
   "database:connected": "+ <%= dbConn %> connected.",
-  "database:error-unsupported": "Unsupported database connection."
+  "database:error-unsupported": "Unsupported database connection.",
+  "bootstrap:server:started": "Server is running on <%= port %>"
 }
