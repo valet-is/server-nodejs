@@ -1,3 +1,5 @@
+import express from 'express';
+
 import db from './database';
 import { log, error } from './utils/events';
 import { startServer } from './server';
@@ -19,3 +21,5 @@ export function bootstrap() {
     }
   };
 }
+
+export const router = express.Router();

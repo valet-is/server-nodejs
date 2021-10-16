@@ -8,6 +8,8 @@ import apiRateLimit from 'express-rate-limit';
 import mongoSanitize from 'express-mongo-sanitize';
 import hpp from 'hpp';
 
+import routes from './routes';
+
 import { log } from './utils/events';
 import { port, rateLimit } from './config';
 
@@ -27,6 +29,8 @@ export const startServer = async () => {
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
   app.use(morgan('dev'));
+
+  app.use('/', routes);
 
   app.use(
     express.static(path.join(path.join(__dirname, '..', '..', 'public')))

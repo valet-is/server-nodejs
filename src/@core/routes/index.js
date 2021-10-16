@@ -1,16 +1,17 @@
+/* eslint global-require: 0, import/no-dynamic-require: 0  */
 import express from 'express';
+import path from 'path';
+import fs from 'fs';
 
-import * as coreHandlers from '@core/handlers';
+const root = path.join(__dirname, '../../');
+const routesPath = path.join(root, 'routes');
 
-import apiRoutes from '@app/routes/api';
+const namespaces = fs.readdirSync(routesPath).map((fp) => fp.split('.')[0]);
 
 const router = express.Router();
 
-router.get('/status', coreHandlers.status);
-router.post('/bootstrap', coreHandlers.bootstrap);
-
-// @TODO: Add support for dynamic namespaces/routes.
-// Eg. ./api.js -> /api/*, ./<namespace>.js -> /<namespace>/*
-router.use('/api', apiRoutes);
+namespaces.forEach((ns) => {
+  router.use(`/${ns}`, require(path.join(routesPath, `${ns}`)).default);
+});
 
 export default router;
