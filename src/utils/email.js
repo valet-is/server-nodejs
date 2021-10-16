@@ -1,1 +1,1 @@
-export * as default from '@valet/utils/email';
+export * as default from '@core/utils/email';

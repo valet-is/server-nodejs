@@ -1,4 +1,4 @@
-import { db } from '@valet/database';
+import { db } from '@core/database';
 import * as response from '@app/utils/http';
 
 import { baseUrl } from 'config';
