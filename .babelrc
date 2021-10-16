@@ -5,7 +5,7 @@
       "module-resolver",
       {
         "alias": {
-          "config": "./src/config",
+          "config": "./src/@core/config",
           "data": "./src/data",
           "@core": "./src/@core/",
           "^@core/(.+)": "./src/@core/\\1",

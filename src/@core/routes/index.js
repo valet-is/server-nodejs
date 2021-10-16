@@ -1,4 +1,4 @@
-/* eslint global-require: 0, import/no-dynamic-require: 0  */
+/* eslint-disable global-require, import/no-dynamic-require  */
 import express from 'express';
 import path from 'path';
 import fs from 'fs';
@@ -6,7 +6,10 @@ import fs from 'fs';
 const root = path.join(__dirname, '../../');
 const routesPath = path.join(root, 'routes');
 
-const namespaces = fs.readdirSync(routesPath).map((fp) => fp.split('.')[0]);
+const namespaces = fs
+  .readdirSync(routesPath)
+  .map((fp) => fp.split('.')[0])
+  .filter((fp) => fp !== 'index');
 
 const router = express.Router();
 
