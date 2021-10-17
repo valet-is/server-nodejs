@@ -1,3 +1,6 @@
+export const dbConn = process.env.DB_CONNECTION;
+export const dbMongoUrl = process.env.DB_MONGO_URL;
+
 export const jwtSecret = process.env.JWT_SECRET;
 
 export const port = process.env.PORT || 5000;
