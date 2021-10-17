@@ -1,25 +1,15 @@
-import jwt from 'jsonwebtoken';
+/* eslint-disable global-require, import/no-dynamic-require  */
+import path from 'path';
 
-import { db } from '@core/database';
-import * as response from '@core/utils/http';
+import { readDirSync } from '../utils/fs';
 
-import { jwtSecret } from 'config';
+const root = path.join(__dirname, '../../');
+const middlewaresPath = path.join(root, 'middlewares');
 
-export function auth(req, res, next) {
-  const { authorization } = req.headers;
+const middlewares = readDirSync(middlewaresPath)
+  .map((fp) => fp.split('.')[0])
+  .filter((fp) => fp !== 'index');
 
-  if (authorization) {
-    const token = authorization.split(' ')[1];
-
-    const user = jwt.verify(token, jwtSecret);
-
-    const _user = db('users').findOne({ _id: user._id });
-
-    if (!_user || _user.role !== user.role || _user.status !== user.status) {
-      return response.forbidden()(res);
-    }
-
-    return next();
-  }
-  return response.unauthorized()(res);
-}
+middlewares.forEach((m) => {
+  exports[m] = require(path.join(middlewaresPath, `${m}`));
+});

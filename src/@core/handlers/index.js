@@ -1,50 +1,15 @@
-import { db } from '@core/database';
-import { baseUrl } from 'config';
+/* eslint-disable global-require, import/no-dynamic-require  */
+import path from 'path';
 
-const namespace = 'core';
+import { readDirSync } from '../utils/fs';
 
-export default function core(req, res) {
-  const appConfig = db('config').findOne({ type: 'app' });
-  const { appName, appDesc } = appConfig;
+const root = path.join(__dirname, '../../');
+const handlersPath = path.join(root, 'handlers');
 
-  res.json({
-    name: appName,
-    description: appDesc,
-    baseUrl,
-    namespace,
-    routes: {
-      // TODO Auto generate routes
-      '/resource': {
-        methods: ['get', 'post'],
-        _links: {
-          self: `${baseUrl}/${namespace}/resource`,
-        },
-      },
-      '/resource/:id': {
-        methods: ['get', 'put', 'patch', 'delete'],
-        _links: {
-          self: `${baseUrl}/${namespace}/resource/:id`,
-        },
-      },
-      '/media': {
-        methods: ['get', 'post'],
-        _links: {
-          self: `${baseUrl}/${namespace}/media`,
-        },
-      },
-      '/users': {
-        methods: ['get', 'post', 'delete', 'patch'],
-        _links: {
-          self: `${baseUrl}/${namespace}/users`,
-        },
-      },
-      '/config': {
-        methods: ['get', 'post', 'delete', 'patch'],
-        _links: {
-          self: `${baseUrl}/${namespace}/config`,
-        },
-      },
-    },
-    _links: {},
-  });
-}
+const handlers = readDirSync(handlersPath)
+  .map((fp) => fp.split('.')[0])
+  .filter((fp) => fp !== 'index');
+
+handlers.forEach((m) => {
+  exports[m] = require(path.join(handlersPath, `${m}`));
+});

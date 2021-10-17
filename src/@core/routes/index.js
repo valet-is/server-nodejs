@@ -1,58 +1,20 @@
+/* eslint-disable global-require, import/no-dynamic-require  */
 import express from 'express';
-import fileUpload from 'express-fileupload';
+import path from 'path';
 
-import * as coreMiddlewares from '@core/middlewares';
+import { readDirSync } from '../utils/fs';
 
-import * as handlers from '@core/handlers';
-import * as resourceHandler from '@core/handlers/resource';
-import * as usersHandler from '@core/handlers/users';
-import * as configHandler from '@core/handlers/config';
-import * as mediaHandler from '@core/handlers/media';
-import * as emailHandler from '@core/handlers/email';
+const root = path.join(__dirname, '../../');
+const routesPath = path.join(root, 'routes');
+
+const namespaces = readDirSync(routesPath)
+  .map((fp) => fp.split('.')[0])
+  .filter((fp) => fp !== 'index');
 
 const router = express.Router();
 
-router.get('/', handlers.core);
-
-// users
-router.get('/users', coreMiddlewares.auth, usersHandler.get);
-router.get('/users/:id', coreMiddlewares.auth, usersHandler.getSingle);
-router.post('/users', usersHandler.post);
-router.patch('/users/:id', coreMiddlewares.auth, usersHandler.patch);
-router.delete('/users/:id', coreMiddlewares.auth, usersHandler.delete);
-
-// resource
-router.get('/resource', coreMiddlewares.auth, resourceHandler.get);
-router.get('/resource/:name', coreMiddlewares.auth, resourceHandler.getSingle);
-router.post('/resource', coreMiddlewares.auth, resourceHandler.post);
-router.put('/resource/:name', coreMiddlewares.auth, resourceHandler.put);
-router.patch('/resource/:name', coreMiddlewares.auth, resourceHandler.patch);
-router.delete('/resource/:name', coreMiddlewares.auth, resourceHandler.delete);
-
-// media
-// TODO: Add coreMiddlewares.auth middleware
-router.get('/media', coreMiddlewares.auth, mediaHandler.get);
-router.post(
-  '/media',
-  [
-    coreMiddlewares.auth,
-    fileUpload({
-      createParentPath: true,
-      limits: {
-        fileSize: 2 * 1024 * 1024 * 1024, // 2MB max file(s) size
-      },
-    }),
-  ],
-  mediaHandler.post
-);
-
-// config
-router.get('/config', coreMiddlewares.auth, configHandler.get);
-router.get('/config/:type', coreMiddlewares.auth, configHandler.getByType);
-router.post('/config/:type', coreMiddlewares.auth, configHandler.postByType);
-router.patch('/config/:type', coreMiddlewares.auth, configHandler.patchByType);
-
-// email
-router.post('/email', coreMiddlewares.auth, emailHandler.post);
+namespaces.forEach((ns) => {
+  router.use(`/${ns}`, require(path.join(routesPath, `${ns}`)).default);
+});
 
 export default router;

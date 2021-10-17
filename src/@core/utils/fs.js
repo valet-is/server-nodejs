@@ -1,11 +1,11 @@
-const fs = require('fs');
+import fs from 'fs';
 
-export const ensureDirSync = function (path) {
+export function ensureDirSync(path) {
   if (fs.existsSync(path)) return;
   fs.mkdirSync(path);
-};
+}
 
-export const isFileExists = (fp) => {
+export function isFileExists(fp) {
   try {
     fs.lstatSync(fp);
   } catch (err) {
@@ -14,6 +14,13 @@ export const isFileExists = (fp) => {
     }
     throw err;
   }
-
   return true;
-};
+}
+
+export function readDirSync(path) {
+  try {
+    return fs.readdirSync(path);
+  } catch (err) {
+    return [];
+  }
+}

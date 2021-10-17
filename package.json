@@ -1,4 +1,5 @@
 {
+  "private": true,
   "name": "@valet-is/server-nodejs",
   "version": "1.0.0-alpha.0",
   "main": "./build/bin/bootstrap.js",

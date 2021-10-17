@@ -4,13 +4,13 @@
   },
   "api": {
     "name": "Valet",
-    "version": "1.0",
     "description": "Valet API",
+    "version": "1.0",
     "baseUrl": "http://localhost:5000",
     "contact": {
-      "name": "John Doe",
-      "email": "john@example.com",
-      "url": null
+      "name": "Diyasen Bandara",
+      "email": "hello@example.com",
+      "url": "https://api.example.com"
     },
     "license": {
       "name": "The MIT License",
@@ -26,6 +26,18 @@
   "resources": {
     "api": {
       "posts": {
+        "type": "proxy",
+        "private": false,
+        "protected": false,
+        "published": true,
+        "description": null,
+        "methods": {
+          "get": {
+            "endpoint": "https://jsonplaceholder.typicode.com/posts"
+          }
+        }
+      },
+      "articles": {
         "type": "default",
         "private": false,
         "protected": false,
@@ -38,7 +50,8 @@
           "patch": {},
           "delete": {}
         },
-        "schema": "$posts"
+        "schema": "$articles",
+        "mock": []
       },
       "comments": {
         "type": "default",
@@ -52,7 +65,8 @@
           "patch": {},
           "delete": {}
         },
-        "schema": "$comments"
+        "schema": "$comments",
+        "mock": []
       },
       "users": {
         "type": "default",
@@ -66,11 +80,12 @@
           "patch": {},
           "delete": {}
         },
-        "schema": "$users"
+        "schema": "$users",
+        "mock": []
       }
     },
     "schemas": {
-      "posts": {
+      "articles": {
         "id": {
           "type": "number",
           "length": 64,
@@ -95,7 +110,7 @@
         "@comments": {
           "type": "$comments",
           "aggregate": {
-            "id": "$id"
+            "id": "$articleId"
           }
         }
       },
@@ -107,7 +122,7 @@
           "unique": true,
           "auto": true
         },
-        "postId": {
+        "articleId": {
           "type": "number",
           "required": true
         },
