@@ -1,53 +1,15 @@
-import * as spec from '@core/utils/spec';
+/* eslint-disable global-require, import/no-dynamic-require  */
+import path from 'path';
 
-const namespace = 'core';
+import { readDirSync } from '../utils/fs';
 
-export { get as status } from './status';
-export { post as bootstrap } from './bootstrap';
-export * as api from './api';
+const root = path.join(__dirname, '../../');
+const handlersPath = path.join(root, 'handlers');
 
-export default function index(req, res) {
-  const specParsed = spec.load();
-  const { name, description, baseUrl } = specParsed.api;
+const handlers = readDirSync(handlersPath)
+  .map((fp) => fp.split('.')[0])
+  .filter((fp) => fp !== 'index');
 
-  res.json({
-    name,
-    description,
-    baseUrl,
-    namespace,
-    routes: {
-      // @TODO: Auto generate routes
-      '/resource': {
-        methods: ['get', 'post'],
-        _links: {
-          self: `${baseUrl}/${namespace}/resource`,
-        },
-      },
-      '/resource/:id': {
-        methods: ['get', 'put', 'patch', 'delete'],
-        _links: {
-          self: `${baseUrl}/${namespace}/resource/:id`,
-        },
-      },
-      '/media': {
-        methods: ['get', 'post'],
-        _links: {
-          self: `${baseUrl}/${namespace}/media`,
-        },
-      },
-      '/users': {
-        methods: ['get', 'post', 'delete', 'patch'],
-        _links: {
-          self: `${baseUrl}/${namespace}/users`,
-        },
-      },
-      '/config': {
-        methods: ['get', 'post', 'delete', 'patch'],
-        _links: {
-          self: `${baseUrl}/${namespace}/config`,
-        },
-      },
-    },
-    _links: {},
-  });
-}
+handlers.forEach((m) => {
+  exports[m] = require(path.join(handlersPath, `${m}`));
+});

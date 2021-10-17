@@ -1,7 +1,7 @@
 import EventEmitter from 'events';
 import template from 'lodash/template';
 
-import messages from 'data/messages.json';
+import messages from '../data/messages.json';
 
 import logger from './logger';
 
